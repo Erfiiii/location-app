@@ -1,8 +1,6 @@
-import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
+import { GeoJsonData } from "../../types";
 
-export const downloadJson = (
-  data: FeatureCollection<Geometry, GeoJsonProperties> | null
-) => {
+export const downloadJson = (data: GeoJsonData) => {
   const jsonContent = JSON.stringify(data);
   const blob =
     "data:text/json;charset=utf-8," + encodeURIComponent(jsonContent);

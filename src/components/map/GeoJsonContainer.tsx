@@ -1,9 +1,9 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
 import { GeoJSON } from "react-leaflet";
+import { GeoJsonData } from "../../types";
 
 interface OwnProps {
-  data: FeatureCollection<Geometry, GeoJsonProperties> | null;
+  data: GeoJsonData;
 }
 
 type Props = PropsWithChildren<OwnProps>;

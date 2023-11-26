@@ -1,12 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import osmtogeojson from "osmtogeojson";
-import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
+import { GeoJsonData } from "../../types";
 
 export const useGetGeoJson = (
   bounds: string,
-  setGeoJsonData: Dispatch<
-    SetStateAction<FeatureCollection<Geometry, GeoJsonProperties> | null>
-  >
+  setGeoJsonData: Dispatch<SetStateAction<GeoJsonData>>
 ): [boolean, string] => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<string>("");

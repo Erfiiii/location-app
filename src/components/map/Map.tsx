@@ -1,14 +1,14 @@
 import { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
 import "./Map.css";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Marker } from "./Marker";
 import { Box } from "./Box";
 import { GeoJsonContainer } from "./GeoJsonContainer";
+import { GeoJsonData } from "../../types";
 
 interface OwnProps {
   setBounds: Dispatch<SetStateAction<string>>;
-  data: FeatureCollection<Geometry, GeoJsonProperties> | null;
+  data: GeoJsonData;
 }
 
 type Props = PropsWithChildren<OwnProps>;
@@ -19,6 +19,7 @@ export function Map(props: Props) {
       className="map-container"
       center={[52.534283, 13.4283345]}
       zoom={18}
+      minZoom={15}
       scrollWheelZoom={false}
     >
       <TileLayer
