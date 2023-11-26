@@ -18,5 +18,5 @@ export function Marker(props: Props) {
   useEffect(() => {
     map.locate();
   }, []);
-  return position === null ? null : <LeafletMarker position={position} />;
+  return position === null ? null : <LeafletMarker position={position} opacity={0.4}  />;
 }

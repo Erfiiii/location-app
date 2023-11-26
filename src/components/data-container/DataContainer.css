@@ -2,9 +2,9 @@
     position: fixed;
     right: 0;
     top: 0;
-    width: 25vw;
+    width: 28vw;
     height: 100vh;
-    padding: 16px;
+    padding: 8px;
     text-align: left;
     overflow-y: scroll;
 }
