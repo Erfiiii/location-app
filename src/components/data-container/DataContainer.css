@@ -1,0 +1,16 @@
+.data-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 25vw;
+    height: 100vh;
+    padding: 16px;
+    text-align: left;
+    overflow-y: scroll;
+}
+
+.data-container__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
