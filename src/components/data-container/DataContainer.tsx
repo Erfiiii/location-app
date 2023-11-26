@@ -1,36 +1,35 @@
-import { PropsWithChildren, useCallback } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useCallback,
+} from "react";
 import "./DataContainer.css";
 import { useGetGeoJson } from "./useGetGeoJson";
+import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
+import { downloadJson } from "./utils";
 
-interface OwnProps {}
+interface OwnProps {
+  setData: Dispatch<
+    SetStateAction<FeatureCollection<Geometry, GeoJsonProperties> | null>
+  >;
+  bounds: string;
+  data: FeatureCollection<Geometry, GeoJsonProperties> | null
+}
 
 type Props = PropsWithChildren<OwnProps>;
 
 export function DataContainer(props: Props) {
-  const data = useGetGeoJson();
-  const downloadJSON = useCallback(() => {
-    const jsonContent = JSON.stringify(data, null,0);
-    const blob = "data:text/json;charset=utf-8," + encodeURIComponent(jsonContent);
-
-    const link = document.createElement("a");
-    link.setAttribute("href", blob)
-    link.setAttribute("download", "data.json")
-    // link.href = window.URL.createObjectURL(blob);
-    // link.download = "data.json";
-
-    // document.body.appendChild(link);
-    link.click();
-
-    // document.body.removeChild(link);
-  }, [data]);
+  const [isLoading, data] = useGetGeoJson(props.bounds, props.setData);
+  const downloadJSON = useCallback(() => downloadJson(props.data),[props.data] );
 
   return (
     <div className="data-container">
       <div className="data-container__header">
         <div>Data</div>
-        <button onClick={downloadJSON}>Download</button>
+        <button disabled={isLoading} onClick={downloadJSON}>Download</button>
       </div>
-      {!data ? <div>Loading...</div> : <pre>{data}</pre>}
+      {isLoading ? <div>Loading...</div> : <pre>{data}</pre>}
     </div>
   );
 }
